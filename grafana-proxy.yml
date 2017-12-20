@@ -1,0 +1,18 @@
+grafana:
+  # base Grafana URL
+  url: http://localhost:3000
+  # file or directory containing PEM-encoded CA certs.
+  # if empty or omitted will use system defaults.
+  cacerts: ""
+  # Grafana API key
+  key: ""
+  # datasource number in Grafana
+  datasource: 1
+
+server:
+  # interface and port to serve proxy on
+  address: localhost:8080
+
+log:
+  # debug, info, warning, error
+  level: info
