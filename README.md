@@ -2,6 +2,10 @@
 access to a remote Grafana datasource, which you have access to via an
 [API token](https://grafana.com/docs/http_api/auth/).
 
+## Installation
+
+A container image is available on Docker hub at `retzkek/grafana-proxy`.
+
 ## Building
 
 Run `make` to build a stand-alone binary (requires Go > v1.8).
