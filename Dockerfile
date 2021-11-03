@@ -1,12 +1,13 @@
-FROM golang:1.8 as builder
-WORKDIR /go/src/app
-COPY . .
-RUN go-wrapper download   # "go get -d -v ./..."
-RUN CGO_ENABLED=0 go-wrapper install -tags=netgo -ldflags="-X main.BUILD=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+FROM golang:alpine as builder
+WORKDIR /build
+COPY . /build/grafana-proxy
+RUN apk add --update --no-cache --virtual build-dependencies \
+ && cd grafana-proxy  \
+ && go build -tags netgo -ldflags="-X main.BUILD=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root
-COPY --from=builder /go/bin/app .
-COPY --from=builder /go/src/app/grafana-proxy.yml /root/
-CMD ["./app"]
+COPY --from=builder /build/grafana-proxy/grafana-proxy ./
+COPY --from=builder /build/grafana-proxy/grafana-proxy.yml ./
+CMD ["./grafana-proxy"]

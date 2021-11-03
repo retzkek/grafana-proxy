@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 )
 
 // LoadCerts creates a cert pool with the PEM file at path,
